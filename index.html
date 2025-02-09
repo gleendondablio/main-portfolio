@@ -13,838 +13,11 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+     <link
+      href="style.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-      @font-face {
-        font-family: "Humane Bold";
-        src: url("fonts/Humane-Bold.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      /* Humane Medium */
-      @font-face {
-        font-family: "Humane Medium";
-        src: url("fonts/Humane-Medium.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      /*Sans */
-      @font-face {
-        font-family: "Raintion Black";
-        src: url("fonts/Raintion-Black.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      /*Sans Finlikless*/
-      @font-face {
-        font-family: "Finlikless-Regular";
-        src: url("fonts/Finlikless-Regular.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      /*Sans Esentika*/
-      @font-face {
-        font-family: "Esentika Regular";
-        src: url("fonts/Esentika-Regular.otf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      /*Sans Marengos*/
-      @font-face {
-        font-family: "Marengos Regular";
-        src: url("fonts/Marengos-Regular.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      /* CSS Variables for theming hell */
-      :root {
-        /* Light theme variables */
-        --bg-primary-light: #ffffff;
-        --bg-secondary-light: #f5f5f5;
-        --text-primary-light: #000000;
-        --text-secondary-light: #4a4a4a;
-        --tag-bg-light: #fafafa;
-        --tag-hover-light: #dadada;
-        --border-light: #607274;
-        --border-dark: #4c585b;
-        --testimony-light: #fbfbfb;
-
-        /* Dark theme variables */
-        --bg-primary-dark: #1a1a1a;
-        --bg-secondary-dark: #333333;
-        --text-primary-dark: #d9d9d9;
-        --text-secondary-dark: #d9d9d9;
-        --tag-bg-dark: #333333;
-        --tag-hover-dark: #444444;
-      }
-
-      /* Light mode by default */
-      :root[data-theme="light"] {
-        --bg-primary: var(--bg-primary-light);
-        --bg-secondary: var(--bg-secondary-light);
-        --text-primary: var(--text-primary-light);
-        --text-secondary: var(--text-secondary-light);
-        --tag-bg: var(--tag-bg-light);
-        --tag-hover: var(--tag-hover-light);
-        --border-color: var(--border-light);
-      }
-
-      /* Dark mode */
-      :root[data-theme="dark"] {
-        --bg-primary: var(--bg-primary-dark);
-        --bg-secondary: var(--bg-secondary-dark);
-        --text-primary: var(--text-primary-dark);
-        --text-secondary: var(--text-secondary-dark);
-        --tag-bg: var(--tag-bg-dark);
-        --tag-hover: var(--tag-hover-dark);
-        --border-color: var(--border-dark);
-      }
-
-      :root[data-theme="dark"] .social-links a {
-        color: white;
-      }
-
-      /* System preference detection */
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme]) {
-          --bg-primary: var(--bg-primary-dark);
-          --bg-secondary: var(--bg-secondary-dark);
-          --text-primary: var(--text-primary-dark);
-          --text-secondary: var(--text-secondary-dark);
-          --tag-bg: var(--tag-bg-dark);
-          --tag-hover: var(--tag-hover-dark);
-        }
-      }
-
-      /* Reset and base styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont,
-          "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      }
-
-      body {
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        line-height: 1.6;
-        min-height: 100vh;
-        transition: background-color 0.3s, color 0.3s;
-      }
-      .sun-dark-mode {
-        color: white;
-        border: 1px solid white;
-        border-radius: 50%;
-        padding: 8px;
-      }
-      .moon-light-mode {
-        color: black;
-        border: 1px solid black;
-        border-radius: 50%;
-        padding: 8px;
-      }
-
-      /* Theme toggle */
-      .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 10px;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        background: var(--bg-secondary);
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        transition: background-color 0.3s;
-        
-      }
-
-      .theme-toggle:hover {
-        background: var(--tag-hover);
-      }
-
-      /* Container styles */
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-      }
-      .l-border-css {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding: 20px;
-        margin-bottom: 2rem;
-      }
-
-      .l-border-css::before {
-        content: "";
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 40px;
-        height: 40px;
-        border-right: 1.5px solid var(--text-secondary);
-        border-bottom: 1.5px solid var(--text-secondary);
-      }
-
-      .l-border-css::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 40px;
-        height: 40px;
-        border-left: 1.5px solid var(--text-secondary);
-        border-top: 1.5px solid var(--text-secondary);
-      }
-
-      .content-wrapper {
-        max-width: 650px;
-        margin: 0 auto;
-        
-      }
-
-      /* Header section */
-      .header {
-        display: flex;
-        justify-content: space-between;
-        //align-items: center;
-        align-items: flex-start;
-        margin-bottom: 2rem;
-      }
-
-      .profile-info {
-        flex-grow: 1;
-      }
-
-      .name {
-        font-family: "Humane Medium";
-        font-size: 100.104px;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 6px;
-        margin-bottom: 1rem;
-        color: var(--text-secondary);
-      }
-
-      .title {
-        font-family: "Marengos Regular";
-        font-size: 1.5rem;
-        color: var(--text-secondary);
-        margin-bottom: 1rem;
-        font-weight: 700;
-        //line-height: 40px;
-        text-transform: uppercase;
-      }
-
-      .location {
-        color: var(--text-secondary);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .profile-image {
-        width: 110px;
-        height: 110px;
-        border-radius: 50%;
-        object-fit: cover;
-        //margin-left: 2rem;
-        margin-left: 0;
-        margin-top: 1rem;
-        border: 2px solid var(--text-secondary);
-      }
-
-      /* Social links */
-      .social-links {
-        display: flex;
-        gap: 0.3rem;
-        margin-bottom: 2rem;
-      }
-
-      .social-link {
-        width: 40px;
-        height: 40px;
-        //background-color: var(--tag-bg);
-        //border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.3s, border-color 0.3s;
-        border: 1px solid var(--border-color);
-      }
-      .social-links a {
-        text-decoration: none;
-        color: black;
-      }
-
-      .social-link:hover {
-        background-color: var(--tag-hover);
-      }
-      .testimonial {
-        background-color: var(--tag-bg);
-        padding: 20px 25px;
-        font-size: 14px;
-        border-radius: 2px;
-        position: relative;
-        font-family: "Marengos Regular";
-        line-height: 1.6;
-        color: var(--text-secondary);
-        margin-bottom: 1rem;
-        margin-top:3rem;
-        text-align: justify;
-      }
-
-      .testimonial::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 5px;
-        background-color: #727d73;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-      }
-
-      .testimonial-text {
-        margin: 0 0 10px 0;
-      }
-
-      .testimonial-author {
-        text-align: right;
-        margin: 0;
-      }
-
-      .testimonial-author::before {
-        content: "- ";
-      }
-
-      /* Bio section */
-      .bio {
-        margin-bottom: 2rem;
-        margin-top: 1rem;
-        color: var(--text-secondary);
-        font-size: 1rem;
-        line-height: 1.7;
-        text-align: justify;
-      }
-
-      /* Skills section */
-      .skills-section {
-        margin-bottom: 1rem;
-      }
-      .skills-section h2 {
-        font-family: "Humane Medium";
-        font-size: 3.5rem;
-        text-transform: uppercase;
-        margin-bottom: 0.2rem;
-        letter-spacing: 3px;
-        font-weight: 400;
-        color: var(--text-secondary);
-      }
-
-      .skills-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-      }
-
-      .skill-tag {
-        background-color: var(--tag-bg);
-        padding: 0.5rem 1rem;
-        //border-radius: 6px;
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-        transition: background-color 0.3s, border-color 0.3s;
-        border: 1px solid var(--border-color);
-      }
-
-      .skill-tag:hover {
-        background-color: var(--tag-hover);
-      }
-
-      .skills-chart {
-        width: 100%;
-        height: 200px;
-        margin: auto;
-        text-align: left;
-        //margin-top: 1rem;
-      }
-      .skills-tech {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        justify-content: justify;
-      }
-      .tech-used {
-        font-family: "Humane Medium";
-        text-align: left;
-        font-size: 1.8rem;
-        text-transform: uppercase;
-        margin-bottom: 0.2rem;
-        letter-spacing: 3px;
-        font-weight: 500;
-        color: var(--text-secondary);
-      }
-
-      .item-tech {
-        background-color: var(--tag-bg);
-        border: 1px solid var(--border-color);
-        padding: 1rem;
-        padding-bottom: 5px;
-        text-align: center;
-        width: 100px;
-        height: 100px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .item-tech p {
-        margin: 0;
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-      }
-      .svg-icon {
-        width: 40px; /* You can adjust the size of the icon here */
-        height: 40px;
-        color: var(--text-secondary); /* Control the color of the SVG */
-      }
-
-      .languages-section {
-        margin-top: 1.5rem;
-      }
-
-      .languages-section h2 {
-        font-family: "Humane Medium";
-        font-size: 3.5rem;
-        text-transform: uppercase;
-        margin-bottom: 0.2rem;
-        letter-spacing: 3px;
-        font-weight: 400;
-        color: var(--text-secondary);
-      }
-
-      .languages-list {
-        border: 1px solid var(--border-color);
-        padding: 10px;
-        border-radius: 5px;
-      }
-
-      .languages-list p {
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .education-section {
-        margin-top: 4rem;
-      
-      }
-      .education-section h2 {
-        font-family: "Humane Medium";
-        font-size: 3.5rem;
-        text-transform: uppercase;
-        margin-bottom: 0.2rem;
-        letter-spacing: 3px;
-        font-weight: 500;
-        color: var(--text-secondary);
-      }
-      .education-item {
-        margin-bottom: 2rem;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 0.5rem;
-        
-      }
-      .education-info {
-        /* Container for title and subtitle */
-      }
-      .education-title {
-        text-transform: uppercase;
-        font-family: "Marengos Regular";
-        font-size: 1.2rem;
-        font-weight: 300;
-        color: var(--text-secondary);
-        margin-bottom: 0.5rem;
-      }
-      .education-subtitle {
-        //font-family: 'Marengos Regular';
-        color: var(--text-secondary);
-        font-size: 1rem;
-        margin-bottom: 0.25rem;
-      }
-      .education-date {
-        background-color: var(--bg-secondary);
-        padding: 0.2rem 0.6rem;
-        //border-radius: 4px;
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-        height: fit-content;
-        align-self: start;
-      }
-
-      /* Experienced Section*/
-
-      .experience-section {
-        margin-top: 2rem;
-      }
-
-      .experience-section h2 {
-        font-family: "Humane Medium";
-        font-size: 3.5rem;
-        text-transform: uppercase;
-        margin-bottom: 0.1rem;
-        letter-spacing: 3px;
-        font-weight: 500;
-        color: var(--text-secondary);
-      }
-
-      .experience-item {
-        margin-bottom: 2rem;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 0.5rem;
-      }
-
-      .experience-info {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-      }
-
-      .experience-title {
-        text-transform: uppercase;
-        font-family: "Marengos Regular";
-        font-size: 1.2rem;
-        font-weight: 300;
-        color: var(--text-secondary);
-        margin-bottom: 0.5rem;
-      }
-
-      .experience-subtitle {
-        //font-family: 'Marengos Regular';
-        color: var(--text-secondary);
-        font-size: 1rem;
-        margin-bottom: 0.25rem;
-        //text-align: justify;
-      }
-
-      .experience-date {
-        background-color: var(--bg-secondary);
-        padding: 0.2rem 0.6rem;
-        //border-radius: 4px;
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-        height: fit-content;
-        align-self: start;
-      }
-
-      .experience-bullets {
-        list-style-type: disc;
-        padding-left: 1.2rem;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-        color: var(--text-secondary);
-        //text-align: justify;
-      }
-
-      .experience-bullets li {
-        font-size: 0.9rem;
-        margin-bottom: 0.25rem;
-        line-height: 1.4;
-      }
-
-      .projects-section {
-        margin-top: 4rem;
-      }
-
-      .projects-section h2 {
-        font-family: "Humane Medium";
-        font-size: 3.5rem;
-        text-transform: uppercase;
-        margin-bottom: 0.2rem;
-        letter-spacing: 3px;
-        font-weight: 500;
-        color: var(--text-secondary);
-      }
-
-      .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin-bottom: 2rem;
-      }
-
-      .project-card {
-        //background-color: var(--bg-secondary);
-        //border-radius: 12px;
-        padding: 1rem;
-        transition: transform 0.3s ease;
-        border: 1px solid var(--border-color);
-        width: 320px;
-        height: 260px;
-      }
-
-      .project-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .project-title {
-        font-family: "Marengos Regular";
-        font-size: 1.2rem;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        color: var(--text-secondary);
-      }
-
-      .project-description {
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-        line-height: 1.4;
-      }
-
-      .project-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-      }
-
-      .project-tag {
-        background-color: var(--tag-bg);
-        padding: 0.2rem 0.6rem;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-      }
-      a.project-link {
-        text-decoration: none;
-      }
-
-      .folder-section {
-        margin-top: 4rem;
-        padding: 0;
-      }
-
-      .folder-section h2 {
-        font-family: "Humane Medium";
-        text-align: center;
-        font-size: 3.5rem;
-        text-transform: uppercase;
-        margin-bottom: 0.2rem;
-        letter-spacing: 3px;
-        font-weight: 500;
-        color: var(--text-secondary);
-      }
-
-      .folder-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0;
-        //margin: 0; /* Remove any outer margin */
-        //padding: 0; /* Remove any inner padding */
-        border: 1px solid var(--border-color);
-        padding: 10px;
-        border-radius: 5px;
-      }
-
-      .folder-item {
-        text-decoration: none;
-        text-align: center;
-        transition: transform 0.3s ease;
-        margin: 0; /* No margin around items */
-        padding: 0; /* Remove padding */
-        width: calc(33.33% - 10px);
-      }
-
-      .folder-item:hover {
-        transform: translateY(-5px);
-      }
-
-      .folder-icon {
-        //font-size: 4rem;
-        color: var(--text-primary);
-      }
-
-      .folder-label {
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-
-      /* Responsive design */
-      @media (max-width: 768px) {
-        .container {
-          padding: 2rem 1.5rem;
-        }
-        .theme-toggle {
-         margin-top:3.5rem;
-        }
-        .content-wrapper .navbar ul{
-         justify-content: left;
-         font-size:11px;
-         gap: 0.5rem;
-         
-        }
-        
-        
-        .l-border-css {
-          padding: 15px;
-        }
-
-        .l-border-css::before,
-        .l-border-css::after {
-          width: 30px;
-          height: 30px;
-        }
-
-        .name {
-          font-size: 4.5rem;
-        }
-        .title {
-          font-size: 1.4rem;
-        }
-
-        .header {
-          flex-direction: column-reverse;
-          text-align: center;
-          align-items: center;
-        }
-        .profile-info {
-          padding-right: 0;
-        }
-        .location {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 0.5rem;
-          margin-bottom: 1.5rem;
-          text-align: center;
-        }
-
-        .profile-image {
-          margin: 0 0 2rem 0;
-        }
-
-        .social-links {
-          justify-content: center;
-        }
-        .skills-chart {
-          height: 170px;
-        }
-
-        .theme-toggle {
-          top: 10px;
-          right: 10px;
-        }
-        .skills-tech {
-          justify-content: center;
-          gap: 0.6rem;
-        }
-
-        .item-tech {
-          width: 70px;
-          height: 70px;
-        }
-        .item-tech p {
-          font-size: 10px;
-        }
-
-        .projects-section h2 {
-          //text-align: center;
-        }
-        .projects-grid {
-          grid-template-columns: 1fr;
-          justify-items: center;
-        }
-        .education-section h2 {
-          //text-align: center;
-        }
-        .languages-section h2 {
-          //text-align: center;
-        }
-
-        .education-item {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .education-title {
-          flex: 1;
-        }
-
-        .education-date {
-          display: inline;
-          padding: 0.2rem 0.4rem;
-        }
-        .folder-grid {
-          margin-left: 4.5%;
-          margin-right: 4.5%;
-        }
-      }
-
-      .footer {
-        text-align: center;
-        font-size: 13px;
-      }
-      .navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: left;
-    gap: 2rem;
-    
-}
-.navbar {
-    
-    margin-bottom: 1rem;
-    background-color: #727d73;
-    padding: 0.1rem;
-    position: sticky;
-    top: 0; /* Stick to the top of the viewport */
-     z-index: 1000;
-}
-.navbar li a {
-    color: #f5f5f5;
-    text-decoration: none;
-    padding-right: 0.4rem;
-    padding-left:0.4rem;
-    
-}
-
-.navbar li a:hover {
-  color: var(--text-secondary;
-}
-
-
-    </style>
   </head>
   <body>
     <button class="theme-toggle" aria-label="Toggle theme">
@@ -856,12 +29,12 @@
       <div class="content-wrapper">
       <div class="navbar">
     <ul>
-        <li><a href="#">Myself</a></li>
+        <li><a href="#home" class="active">Myself</a></li>
+         <li><a href="#contact">Contact</a></li>
        <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
         <li><a href="#resources">Files</a></li>
-        <li style="margin-left: auto;"><a href="#"><i class='bx bx-expand-horizontal'></i></a></li>
+        
     </ul>
     </div>
         <div class="l-border-css">
@@ -872,9 +45,9 @@
           
             </span>  
               <h2 class="title">
-                Data Science and Web/App Developer
+                Data Science and Software Developer
               </h2>
-              <div class="location" id="contact">
+              <div class="location" id="contact" class="section">
                 <span><i class="bx bx-globe bx-sm"></i></span>
                 Manila, Philippines
               </div>
@@ -928,55 +101,175 @@
             
           </header>
         </div>
-        <div class="testimonial">
+        <div class="testimonial" id="home" class="section">
           <p class="testimonial-text">
-            <b>Hello</b>, glad to have you here! this is my personal portfolio. I created this
-            site to demonstrate my projects, skills, and experiences. Feel free to
-            explore and know more about me and my work.
+            Data Science, Software Developer and a lifetime learner. I love to build things that solves problems and make people's life easier. Great to see you here! :)
           </p>
           <b><p class="testimonial-author" style="font-size: 15px">Glen</p></b>
         </div>
         <section class="bio">
-          Dynamic and detail-oriented <b>Data Science</b> Enthusiast,
-          <b>Web Developer</b>, and <b>App Developer</b> with a passion for
-          creating innovative solutions. Proficient in leveraging data science
-          tools such as Python, Pandas, and Tensorflow to analyze and interpret
-          complex datasets, delivering actionable insights that drive
-          decision-making. Experienced in designing and deploying machine
-          learning models, as well as building interactive web and mobile
-          applications using modern frameworks. Known for combining analytical
-          expertise with creative problem-solving to develop data-driven
-          solutions and intuitive designs. Committed to continuous learning and
-          staying at the forefront of industry advancements to deliver
-          cutting-edge technologies and applications.
+        Right now, I’m diving into the world of <b>Data Science</b> while also delving into <b>Software Development</b>. I love using all sorts of tech tools and frameworks to solve problems and build cool stuff. I’m always learning, whether it’s about coding, analyzing data, or exploring new ways to make things work better. I’m good about figuring out how to tackle challenges and create solutions that actually make a difference. For me, it’s all about growing my skills, staying curious, and keeping up with the latest trends in tech. I’m just here, enjoying the journey and excited to see where it takes me!
         </section>
 
-        <section class="skills-section" id="skills">
-        <p style="background-color:#727d73; color:white; padding:2px; text-align:right; font-size:12px " >Skills</p>
-        
-          <h2>Expertise</h2>
-          <div class="skills-grid">
-            <span class="skill-tag">MS Excel</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Tensorflow</span>
-            <span class="skill-tag">Pandas</span>
-            <span class="skill-tag">Flask</span>
-            <span class="skill-tag">Tkinter</span>
-            <span class="skill-tag">Kivy</span>
-            <span class="skill-tag">HTML</span>
-            <span class="skill-tag">CSS</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Bootstrap</span>
-            <span class="skill-tag">Tailwind</span>
-            <span class="skill-tag">PHP</span>
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">Flutter</span>
-            <span class="skill-tag">Dart</span>
-            <span class="skill-tag">Java</span>
-            <span class="skill-tag">Java Swing</span>
-            <span class="skill-tag">Linux</span>
-          </div>
-        </section>
+        <section class="education-section">
+  <h2>Education</h2>
+  <div class="education-container">
+    <!-- Card for Universidad De Manila -->
+    <div class="education-card">
+      <div class="education-logo">
+        <img src="images/udm.png" alt="Universidad De Manila Logo">
+      </div>
+      <div class="education-info">
+        <h3 class="education-title">Universidad De Manila</h3>
+        <p class="education-subtitle">
+          BACHELOR IN INFORMATION TECHNOLOGY WITH SPECIALIZATION IN DATA SCIENCE
+        </p>
+      </div>
+      <span class="education-date">2025</span>
+    </div>
+
+    <!-- Card for JBEST School -->
+    <div class="education-card">
+      <div class="education-logo">
+        <img src="images/jbest.png" alt="JBEST School Logo">
+      </div>
+      <div class="education-info">
+        <h3 class="education-title">
+          JBEST School of Technology and Practical Skills, Inc.
+        </h3>
+        <p class="education-subtitle">
+          INFORMATION AND COMMUNICATION TECHNOLOGY (ICT)
+        </p>
+      </div>
+      <span class="education-date">2021</span>
+      
+    </div>
+  </div>
+</section>
+
+       <section class="skills-section" id="skills" class="section">
+  <p style="background-color:#727d73; color:white; padding:2px; text-align:right; font-size:12px;">Skills</p>
+  <h2>Expertise</h2>
+
+  <!-- Tabs -->
+  <div class="tab">
+    <button class="tablink" onclick="openTab(event, 'WebDevelopment')">Web Development</button>
+    <button class="tablink" onclick="openTab(event, 'AppDevelopment')">App Development</button>
+    <button class="tablink" onclick="openTab(event, 'DataScience')">Data Science</button>
+  </div>
+
+  <!-- Tab Content -->
+  <div id="WebDevelopment" class="tabcontent">
+    <div class="skills-grid">
+      <span class="skill-tag">
+        <img src="icons/html5.svg" alt="HTML Icon" class="skill-icon" />
+        HTML
+      </span>
+      <span class="skill-tag">
+        <img src="icons/css3.svg" alt="CSS Icon" class="skill-icon" />
+        CSS
+      </span>
+      <span class="skill-tag">
+        <img src="icons/javascript.svg" alt="JavaScript Icon" class="skill-icon" />
+        JavaScript
+      </span>
+      <span class="skill-tag">
+        <img src="icons/php.svg" alt="Php Icon" class="skill-icon" />
+        PHP
+      </span>
+      <span class="skill-tag">
+        <img src="icons/bootstrap.svg" alt="Php Icon" class="skill-icon" />
+        Bootstrap
+      </span>
+      <span class="skill-tag">
+        <img src="icons/tailwindcss.svg" alt="Php Icon" class="skill-icon" />
+        Tailwind
+      </span>
+      <span class="skill-tag">
+        <img src="icons/mysql.svg" alt="Php Icon" class="skill-icon" />
+        MySQL
+      </span>
+      <span class="skill-tag">
+        <img src="icons/typescript.svg" alt="Php Icon" class="skill-icon" />
+        TypeScript
+      </span>
+      <span class="skill-tag">
+        <img src="icons/git.svg" alt="Php Icon" class="skill-icon" />
+        Git
+      </span>
+      <span class="skill-tag">
+        <img src="icons/nodedotjs.svg" alt="Php Icon" class="skill-icon" />
+        Node.js
+      </span>
+      <span class="skill-tag">
+        <img src="icons/jquery.svg" alt="Php Icon" class="skill-icon" />
+        JQuery
+      </span>
+      <span class="skill-tag">
+        <img src="icons/flask.svg" alt="Php Icon" class="skill-icon" />
+        Flask
+      </span>
+      <span class="skill-tag">
+        <img src="icons/react.svg" alt="Php Icon" class="skill-icon" />
+        React.JS
+      </span>
+      <span class="skill-tag">
+        <img src="icons/chartjs.svg" alt="Php Icon" class="skill-icon" />
+        Chart.js
+      </span>
+      <!-- Add more skills with icons as needed -->
+    </div>
+  </div>
+
+  <div id="AppDevelopment" class="tabcontent">
+    <div class="skills-grid">
+      <span class="skill-tag">
+        <img src="icons/flutter.svg" alt="Flutter Icon" class="skill-icon" />
+        Flutter
+      </span>
+      <span class="skill-tag">
+        <img src="icons/dart.svg" alt="Dart Icon" class="skill-icon" />
+        Dart
+      </span>
+       <span class="skill-tag">
+        <img src="icons/google-idx.svg" alt="Dart Icon" class="skill-icon" />
+        IDX
+      </span>
+      <span class="skill-tag">
+        <img src="icons/python.svg" alt="Dart Icon" class="skill-icon" />
+        Kivymd
+      </span>
+      <span class="skill-tag">
+        <img src="icons/python.svg" alt="Dart Icon" class="skill-icon" />
+        Flet
+      </span>
+      
+      <!-- Add more skills with icons as needed -->
+    </div>
+  </div>
+
+  <div id="DataScience" class="tabcontent">
+    <div class="skills-grid">
+      <span class="skill-tag">
+        <img src="icons/python3.svg" alt="Python Icon" class="skill-icon" />
+        Python
+      </span>
+      <span class="skill-tag">
+        <img src="icons/python3.svg" alt="Pandas Icon" class="skill-icon" />
+        Pandas
+      </span>
+      <span class="skill-tag">
+        <img src="icons/tensorflow.svg" alt="Pandas Icon" class="skill-icon" />
+        Tensorflow
+      </span>
+      <span class="skill-tag">
+        <img src="icons/numpy.svg" alt="Pandas Icon" class="skill-icon" />
+        Numpy
+      </span>
+      <!-- Add more skills with icons as needed -->
+    </div>
+  </div>
+</section>
         <div class="testimonial">
           <p class="testimonial-text" style="font-size: 12.5px">
             The graph below represents my confidence level in various fields. As
@@ -987,9 +280,16 @@
         <section class="skills-chart">
           <canvas id="horizontalBarChart"></canvas>
         </section>
-        <h2 class="tech-used">What I Used</h2>
+        
 
         <div class="skills-tech">
+        <h2 class="tech-used">What I Used</h2>
+        <div class="skills-row">
+           <div class="skills-scroll">
+        <div class="item-tech">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100"><mask id="a"  x="0" y="0" mask-type="alpha" maskUnits="userSpaceOnUse"><path fill="#fff" fill-rule="evenodd" d="M70.912 99.317a6.223 6.223 0 0 0 4.96-.19l20.589-9.907A6.25 6.25 0 0 0 100 83.587V16.413a6.25 6.25 0 0 0-3.54-5.632L75.874.874a6.226 6.226 0 0 0-7.104 1.21L29.355 38.04 12.187 25.01a4.162 4.162 0 0 0-5.318.236l-5.506 5.009a4.168 4.168 0 0 0-.004 6.162L16.247 50 1.36 63.583a4.168 4.168 0 0 0 .004 6.162l5.506 5.01a4.162 4.162 0 0 0 5.318.236l17.168-13.032L68.77 97.917a6.217 6.217 0 0 0 2.143 1.4ZM75.015 27.3 45.11 50l29.906 22.701V27.3Z" clip-rule="evenodd"/></mask><g mask="url(#a)"><path fill="#0065A9" d="M96.461 10.796 75.857.876a6.23 6.23 0 0 0-7.107 1.207l-67.451 61.5a4.167 4.167 0 0 0 .004 6.162l5.51 5.009a4.167 4.167 0 0 0 5.32.236l81.228-61.62c2.725-2.067 6.639-.124 6.639 3.297v-.24a6.25 6.25 0 0 0-3.539-5.63Z"/><g filter="url(#b)"><path fill="#007ACC" d="m96.461 89.204-20.604 9.92a6.229 6.229 0 0 1-7.107-1.207l-67.451-61.5a4.167 4.167 0 0 1 .004-6.162l5.51-5.009a4.167 4.167 0 0 1 5.32-.236l81.228 61.62c2.725 2.067 6.639.124 6.639-3.297v.24a6.25 6.25 0 0 1-3.539 5.63Z"/></g><g filter="url(#c)"><path fill="#1F9CF0" d="M75.858 99.126a6.232 6.232 0 0 1-7.108-1.21c2.306 2.307 6.25.674 6.25-2.588V4.672c0-3.262-3.944-4.895-6.25-2.589a6.232 6.232 0 0 1 7.108-1.21l20.6 9.908A6.25 6.25 0 0 1 100 16.413v67.174a6.25 6.25 0 0 1-3.541 5.633l-20.601 9.906Z"/></g><path fill="url(#d)" fill-rule="evenodd" d="M70.851 99.317a6.224 6.224 0 0 0 4.96-.19L96.4 89.22a6.25 6.25 0 0 0 3.54-5.633V16.413a6.25 6.25 0 0 0-3.54-5.632L75.812.874a6.226 6.226 0 0 0-7.104 1.21L29.294 38.04 12.126 25.01a4.162 4.162 0 0 0-5.317.236l-5.507 5.009a4.168 4.168 0 0 0-.004 6.162L16.186 50 1.298 63.583a4.168 4.168 0 0 0 .004 6.162l5.507 5.009a4.162 4.162 0 0 0 5.317.236L29.294 61.96l39.414 35.958a6.218 6.218 0 0 0 2.143 1.4ZM74.954 27.3 45.048 50l29.906 22.701V27.3Z" clip-rule="evenodd" opacity=".25" style="mix-blend-mode:overlay"/></g><defs><filter id="b" width="116.727" height="92.246" x="-8.394" y="15.829" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset/><feGaussianBlur stdDeviation="4.167"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/><feBlend in2="BackgroundImageFix" mode="overlay" result="effect1_dropShadow"/><feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter><filter id="c" width="47.917" height="116.151" x="60.417" y="-8.076" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset/><feGaussianBlur stdDeviation="4.167"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/><feBlend in2="BackgroundImageFix" mode="overlay" result="effect1_dropShadow"/><feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter><linearGradient id="d" x1="49.939" x2="49.939" y1=".258" y2="99.742" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs></svg>
+            <p>Code</p>
+          </div>
           <div class="item-tech">
             <svg
               class="svg-icon"
@@ -999,25 +299,14 @@
             >
               <title>Ubuntu</title>
               <path
-                fill="currentColor"
+                fill="#E95420"
                 d="M17.61.455a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zM12.92.8C8.923.777 5.137 2.941 3.148 6.451a4.5 4.5 0 0 1 .26-.007 4.92 4.92 0 0 1 2.585.737A8.316 8.316 0 0 1 12.688 3.6 4.944 4.944 0 0 1 13.723.834 11.008 11.008 0 0 0 12.92.8zm9.226 4.994a4.915 4.915 0 0 1-1.918 2.246 8.36 8.36 0 0 1-.273 8.303 4.89 4.89 0 0 1 1.632 2.54 11.156 11.156 0 0 0 .559-13.089zM3.41 7.932A3.41 3.41 0 0 0 0 11.342a3.41 3.41 0 0 0 3.41 3.409 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zm2.027 7.866a4.908 4.908 0 0 1-2.915.358 11.1 11.1 0 0 0 7.991 6.698 11.234 11.234 0 0 0 2.422.249 4.879 4.879 0 0 1-.999-2.85 8.484 8.484 0 0 1-.836-.136 8.304 8.304 0 0 1-5.663-4.32zm11.405.928a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41z"
               />
             </svg>
             <p>Ubuntu</p>
           </div>
           <div class="item-tech">
-            <svg
-              class="svg-icon"
-              role="img"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Claude</title>
-              <path
-                fill="currentColor"
-                d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"
-              />
-            </svg>
+           <svg xmlns="http://www.w3.org/2000/svg" width="256" height="257" preserveAspectRatio="xMidYMid" viewBox="0 0 256 257"><path fill="#D97757" d="m50.228 170.321 50.357-28.257.843-2.463-.843-1.361h-2.462l-8.426-.518-28.775-.778-24.952-1.037-24.175-1.296-6.092-1.297L0 125.796l.583-3.759 5.12-3.434 7.324.648 16.202 1.101 24.304 1.685 17.629 1.037 26.118 2.722h4.148l.583-1.685-1.426-1.037-1.101-1.037-25.147-17.045-27.22-18.017-14.258-10.37-7.713-5.25-3.888-4.925-1.685-10.758 7-7.713 9.397.649 2.398.648 9.527 7.323 20.35 15.75L94.817 91.9l3.889 3.24 1.555-1.102.195-.777-1.75-2.917-14.453-26.118-15.425-26.572-6.87-11.018-1.814-6.61c-.648-2.723-1.102-4.991-1.102-7.778l7.972-10.823L71.42 0 82.05 1.426l4.472 3.888 6.61 15.101 10.694 23.786 16.591 32.34 4.861 9.592 2.592 8.879.973 2.722h1.685v-1.556l1.36-18.211 2.528-22.36 2.463-28.776.843-8.1 4.018-9.722 7.971-5.25 6.222 2.981 5.12 7.324-.713 4.73-3.046 19.768-5.962 30.98-3.889 20.739h2.268l2.593-2.593 10.499-13.934 17.628-22.036 7.778-8.749 9.073-9.657 5.833-4.601h11.018l8.1 12.055-3.628 12.443-11.342 14.388-9.398 12.184-13.48 18.147-8.426 14.518.778 1.166 2.01-.194 30.46-6.481 16.462-2.982 19.637-3.37 8.88 4.148.971 4.213-3.5 8.62-20.998 5.184-24.628 4.926-36.682 8.685-.454.324.519.648 16.526 1.555 7.065.389h17.304l32.21 2.398 8.426 5.574 5.055 6.805-.843 5.184-12.962 6.611-17.498-4.148-40.83-9.721-14-3.5h-1.944v1.167l11.666 11.406 21.387 19.314 26.767 24.887 1.36 6.157-3.434 4.86-3.63-.518-23.526-17.693-9.073-7.972-20.545-17.304h-1.36v1.814l4.73 6.935 25.017 37.59 1.296 11.536-1.814 3.76-6.481 2.268-7.13-1.297-14.647-20.544-15.1-23.138-12.185-20.739-1.49.843-7.194 77.448-3.37 3.953-7.778 2.981-6.48-4.925-3.436-7.972 3.435-15.749 4.148-20.544 3.37-16.333 3.046-20.285 1.815-6.74-.13-.454-1.49.194-15.295 20.999-23.267 31.433-18.406 19.702-4.407 1.75-7.648-3.954.713-7.064 4.277-6.286 25.47-32.405 15.36-20.092 9.917-11.6-.065-1.686h-.583L44.07 198.125l-12.055 1.555-5.185-4.86.648-7.972 2.463-2.593 20.35-13.999-.064.065Z"/></svg>
             <p>Claude</p>
           </div>
           <div class="item-tech">
@@ -1029,7 +318,7 @@
             >
               <title>Arch</title>
               <path
-                fill="currentColor"
+                fill="#1793D1"
                 d="M11.39.605C10.376 3.092 9.764 4.72 8.635 7.132c.693.734 1.543 1.589 2.923 2.554-1.484-.61-2.496-1.224-3.252-1.86C6.86 10.842 4.596 15.138 0 23.395c3.612-2.085 6.412-3.37 9.021-3.862a6.61 6.61 0 01-.171-1.547l.003-.115c.058-2.315 1.261-4.095 2.687-3.973 1.426.12 2.534 2.096 2.478 4.409a6.52 6.52 0 01-.146 1.243c2.58.505 5.352 1.787 8.914 3.844-.702-1.293-1.33-2.459-1.929-3.57-.943-.73-1.926-1.682-3.933-2.713 1.38.359 2.367.772 3.137 1.234-6.09-11.334-6.582-12.84-8.67-17.74zM22.898 21.36v-.623h-.234v-.084h.562v.084h-.234v.623h.331v-.707h.142l.167.5.034.107a2.26 2.26 0 01.038-.114l.17-.493H24v.707h-.091v-.593l-.206.593h-.084l-.205-.602v.602h-.091"
               />
             </svg>
@@ -1060,7 +349,7 @@
             >
               <title>Sublime Text</title>
               <path
-                fill="currentColor"
+                fill="#FF9800"
                 d="M20.953.004a.397.397 0 0 0-.18.017L3.225 5.585c-.175.055-.323.214-.402.398a.42.42 0 0 0-.06.22v5.726a.42.42 0 0 0 .06.22c.079.183.227.341.402.397l7.454 2.364-7.454 2.363c-.255.08-.463.374-.463.655v5.688c0 .282.208.444.463.363l17.55-5.565c.237-.075.426-.336.452-.6.003-.022.013-.04.013-.065V12.06c0-.281-.208-.575-.463-.656L13.4 9.065l7.375-2.339c.255-.08.462-.375.462-.656V.384c0-.211-.117-.355-.283-.38z"
               />
             </svg>
@@ -1090,7 +379,7 @@
             >
               <title>Google Colab</title>
               <path
-                fill="currentColor"
+                fill="#F9AB00"
                 d="M16.9414 4.9757a7.033 7.033 0 0 0-4.9308 2.0646 7.033 7.033 0 0 0-.1232 9.8068l2.395-2.395a3.6455 3.6455 0 0 1 5.1497-5.1478l2.397-2.3989a7.033 7.033 0 0 0-4.8877-1.9297zM7.07 4.9855a7.033 7.033 0 0 0-4.8878 1.9316l2.3911 2.3911a3.6434 3.6434 0 0 1 5.0227.1271l1.7341-2.9737-.0997-.0802A7.033 7.033 0 0 0 7.07 4.9855zm15.0093 2.1721l-2.3892 2.3911a3.6455 3.6455 0 0 1-5.1497 5.1497l-2.4067 2.4068a7.0362 7.0362 0 0 0 9.9456-9.9476zM1.932 7.1674a7.033 7.033 0 0 0-.002 9.6816l2.397-2.397a3.6434 3.6434 0 0 1-.004-4.8916zm7.664 7.4235c-1.38 1.3816-3.5863 1.411-5.0168.1134l-2.397 2.395c2.4693 2.3328 6.263 2.5753 9.0072.5455l.1368-.1115z"
               />
             </svg>
@@ -1105,12 +394,16 @@
             >
               <title>Kaggle</title>
               <path
-                fill="currentColor"
+                fill="#20BEFF"
                 d="M.1025 7.3475c-.0681 0-.1022.0341-.1022.102v6.752c0 .0681.034.1022.1022.1022h.7049c.068 0 .1022-.034.1022-.1023v-1.481l.4187-.3985 1.5016 1.91c.041.0477.0884.0716.143.0716h.9091c.0476 0 .0748-.0135.0817-.0407.0135-.041.0066-.075-.0206-.1023l-1.9816-2.4618 1.9002-1.8384c.0204-.0205.0237-.051.01-.092-.0137-.0339-.0408-.051-.0816-.051h-.9398c-.0477 0-.0953.024-.143.0716L.9096 11.607V7.4496c0-.0679-.0342-.102-.1022-.102zm18.0417 0c-.068 0-.102.0341-.102.102v6.752c0 .0681.034.102.102.102h.705c.068 0 .102-.034.102-.102v-6.752c0-.068-.034-.102-.102-.102zM5.961 9.6254c-.5653 0-1.11.1806-1.6343.5415-.0545.0545-.0648.102-.0307.143l.3676.5208c.0272.0477.0717.0545.133.0204.3948-.2722.783-.4086 1.1644-.4086.2927 0 .5158.0886.669.2656.1532.1771.2197.3917.1992.6436-.6606.0681-1.1545.1495-1.4813.245-.8308.2383-1.2461.6913-1.2461 1.3586 0 .4222.1533.7695.4598 1.0419.3132.2654.6845.3982 1.1134.3982.4698 0 .8545-.1125 1.1542-.3372v.1432c0 .0682.0374.102.1123.102h.7048c.068 0 .102-.0338.102-.102V11.372c0-.6604-.2245-1.1406-.6739-1.4403-.3065-.2043-.6776-.3063-1.1134-.3063zm4.3225 0c-.6742 0-1.195.2622-1.5627.7865-.3133.4359-.4699.9671-.4699 1.5936 0 .6604.1634 1.2087.4903 1.6444.3744.4972.892.7455 1.5526.7455.5313 0 .9567-.1327 1.2768-.3982v.531c0 .858-.4122 1.287-1.236 1.287-.361 0-.732-.1907-1.1132-.572a.098.098 0 00-.0716-.0306c-.034 0-.0613.0102-.0817.0307l-.4802.48c-.0408.0613-.0375.1124.0103.1532.1361.1157.2554.2129.3576.2911.102.0783.1905.1413.2656.189.354.1975.7284.2961 1.1235.2961.6808 0 1.207-.1925 1.5781-.577.3711-.3848.5567-.9484.5567-1.6903V9.8196c0-.068-.034-.102-.102-.102h-.705c-.0682 0-.1021.034-.1021.102v.2043c-.3471-.2657-.7763-.3985-1.287-.3985zm4.8021 0c-.6742 0-1.195.2622-1.5627.7865-.3132.4359-.4699.9671-.4699 1.5936 0 .6604.1633 1.2087.4903 1.6444.3744.4972.892.7455 1.5526.7455.5311 0 .9566-.1327 1.2768-.3982v.531c0 .858-.4122 1.287-1.236 1.287-.361 0-.732-.1907-1.1133-.572a.098.098 0 00-.0716-.0306c-.034 0-.0612.0102-.0816.0307l-.48.48c-.0409.0613-.0376.1124.01.1532.1363.1157.2555.2129.3576.2911.1021.0783.1906.1413.2657.189.354.1975.7285.2961 1.1237.2961.6808 0 1.2068-.1925 1.5781-.577.371-.3848.5565-.9484.5565-1.6903V9.8196c0-.068-.034-.102-.102-.102h-.7049c-.0682 0-.1022.034-.1022.102v.2043c-.3474-.2657-.7763-.3985-1.287-.3985zm6.7457 0c-.6537 0-1.185.211-1.5936.6332-.4427.4632-.664 1.0283-.664 1.6956 0 .7083.225 1.2905.6743 1.7467.463.463 1.042.6945 1.7366.6945.6467 0 1.2154-.1838 1.7057-.5515.0545-.041.0545-.0884 0-.143l-.4802-.4903c-.041-.0409-.0919-.0409-.1533 0-.2998.2112-.6368.3167-1.0112.3167-.4222 0-.7729-.119-1.052-.3576-.2452-.2248-.3882-.5038-.429-.8375h3.3197c.0679 0 .1022-.0341.1022-.1023l.01-.2244c.0341-.6878-.1668-1.26-.6025-1.7162-.4224-.4426-.9432-.664-1.5627-.664zm-.0206.7865c.3268 0 .6062.1056.8377.3166.2452.211.371.4734.378.7865h-2.4618c.0613-.3269.2077-.5925.4392-.7968.2313-.2042.5004-.3063.8069-.3063zm-11.4249.102c.6196 0 1.0146.2181 1.1848.6538v1.6854c-.1702.4358-.5755.6538-1.2155.6538-.3133 0-.5687-.0986-.7661-.2963-.2656-.2518-.3983-.6538-.3983-1.2053 0-.9941.3984-1.4914 1.1951-1.4914zm4.802 0c.6196 0 1.0148.2181 1.1851.6538h-.0002v1.6854c-.1703.4358-.5755.6538-1.2155.6538-.3132 0-.5686-.0986-.7661-.2963-.2655-.2518-.3983-.6538-.3983-1.2053 0-.9941.3983-1.4914 1.195-1.4914zm-8.3586 1.6547v1.0215c-.286.286-.6675.412-1.1441.3779-.1703-.0135-.32-.0663-.4493-.1582-.1294-.0919-.2045-.2129-.2249-.3627-.0341-.2657.1158-.47.4495-.6129.2452-.1088.7013-.1974 1.3688-.2656z"
               />
             </svg>
             <p>Kaggle</p>
           </div>
+          </div>
+          </div>
+          <div class="skills-row">
+    <div class="skills-scroll">
           <div class="item-tech">
             <svg
               class="svg-icon"
@@ -1165,7 +458,7 @@
             >
               <title>Android Studio</title>
               <path
-                fill="currentColor"
+                fill="#34A853"
                 d="M19.2693 10.3368c-.3321 0-.6026.2705-.6026.6031v9.8324h-1.7379l-3.3355-6.9396c.476-.5387.6797-1.286.5243-2.0009a2.2862 2.2862 0 0 0-1.2893-1.6248v-.8124c.0121-.2871-.1426-.5787-.4043-.7407-.1391-.0825-.2884-.1234-.4402-.1234a.8478.8478 0 0 0-.4318.1182c-.2701.1671-.4248.4587-.4123.7662l-.0003.721c-1.0149.3668-1.6619 1.4153-1.4867 2.5197a2.282 2.282 0 0 0 .5916 1.2103l-3.2096 6.9064H4.0928c-1.0949-.007-1.9797-.8948-1.9832-1.9896V5.016c-.0055 1.1024.8836 2.0006 1.9859 2.0062a2.024 2.024 0 0 0 .1326-.0037h14.7453s2.5343-.2189 2.8619 1.5392c-.2491.0287-.4449.2321-.4449.4889 0 .7115-.5791 1.2901-1.3028 1.2901h-.8183zM17.222 22.5366c.2347.4837.0329 1.066-.4507 1.3007-.1296.0629-.2666.0895-.4018.0927a.9738.9738 0 0 1-.3194-.0455c-.024-.0078-.046-.0209-.0694-.0305a.9701.9701 0 0 1-.2277-.1321c-.0247-.0192-.0495-.038-.0724-.0598-.0825-.0783-.1574-.1672-.21-.2757l-1.2554-2.6143-1.5585-3.2452a.7725.7725 0 0 0-.6995-.4443h-.0024a.792.792 0 0 0-.7083.4443l-1.5109 3.2452-1.2321 2.6464a.9722.9722 0 0 1-.7985.5795c-.0626.0053-.1238-.0024-.185-.0087-.0344-.0036-.069-.0053-.1025-.0124-.0489-.0103-.0954-.0278-.142-.0452-.0301-.0113-.0613-.0197-.0901-.0339-.0496-.0244-.0948-.0565-.1397-.0889-.0217-.0156-.0457-.0275-.0662-.045a.9862.9862 0 0 1-.1695-.1844.9788.9788 0 0 1-.0708-.9852l.8469-1.8223 3.2676-7.0314a1.7964 1.7964 0 0 1-.7072-1.1637c-.1555-.9799.5129-1.9003 1.4928-2.0559V9.3946a.3542.3542 0 0 1 .1674-.3155.3468.3468 0 0 1 .3541 0 .354.354 0 0 1 .1674.3155v1.159l.0129.0064a1.8028 1.8028 0 0 1 1.2878 1.378 1.7835 1.7835 0 0 1-.6439 1.7836l3.3889 7.0507.8481 1.7643zM12.9841 12.306c.0042-.6081-.4854-1.1044-1.0935-1.1085a1.1204 1.1204 0 0 0-.7856.3219 1.101 1.101 0 0 0-.323.7716c-.0042.6081.4854 1.1044 1.0935 1.1085h.0077c.6046 0 1.0967-.488 1.1009-1.0935zm-1.027 5.2768c-.1119.0005-.2121.0632-.2571.1553l-1.4127 3.0342h3.3733l-1.4564-3.0328a.274.274 0 0 0-.2471-.1567zm8.1432-6.7459l-.0129-.0001h-.8177a.103.103 0 0 0-.103.103v12.9103a.103.103 0 0 0 .0966.103h.8435c.9861-.0035 1.7836-.804 1.7836-1.79V9.0468c0 .9887-.8014 1.7901-1.7901 1.7901zM2.6098 5.0161v.019c.0039.816.6719 1.483 1.4874 1.4869a12.061 12.061 0 0 1 .1309-.0034h1.1286c.1972-1.315.7607-2.525 1.638-3.4859H4.0993c-.9266.0031-1.6971.6401-1.9191 1.4975.2417.0355.4296.235.4296.4859zm6.3381-2.8977L7.9112.3284a.219.219 0 0 1 0-.2189A.2384.2384 0 0 1 8.098 0a.219.219 0 0 1 .1867.1094l1.0496 1.8158a6.4907 6.4907 0 0 1 5.3186 0L15.696.1094a.2189.2189 0 0 1 .3734.2189l-1.0302 1.79c1.6671.9125 2.7974 2.5439 3.0975 4.4018l-12.286-.0014c.3004-1.8572 1.4305-3.488 3.0972-4.4003zm5.3774 2.6202a.515.515 0 0 0 .5271.5028.515.515 0 0 0 .5151-.5151.5213.5213 0 0 0-.8885-.367.5151.5151 0 0 0-.1537.3793zm-5.7178-.0067a.5151.5151 0 0 0 .5207.5095.5086.5086 0 0 0 .367-.1481.5215.5215 0 1 0-.734-.7341.515.515 0 0 0-.1537.3727z"
               />
             </svg>
@@ -1180,7 +473,7 @@
             >
               <title>XAMPP</title>
               <path
-                fill="currentColor"
+                fill="#FB7A24"
                 d="M16.792,11.923c0.113,0.043,0.226,0.079,0.334,0.128c0.45,0.203,0.715,0.553,0.748,1.044 c0.041,0.634,0.044,1.271,0.002,1.905c-0.049,0.732-0.725,1.292-1.483,1.271c-0.735-0.021-1.369-0.62-1.397-1.341 c-0.017-0.441-0.003-0.884-0.006-1.326c-0.001-0.239-0.003-0.242-0.245-0.243c-1.363-0.001-2.726,0.008-4.089-0.003 c-0.888-0.007-1.421,0.482-1.471,1.46c-0.019,0.38-0.1,0.727-0.357,1.018c-0.397,0.451-0.898,0.601-1.472,0.466 c-0.554-0.131-0.867-0.522-1.035-1.048c-0.117-0.367-0.056-0.737,0.012-1.094c0.341-1.797,1.366-3.006,3.125-3.555 c0.357-0.112,0.731-0.166,1.105-0.166c0.94,0.001,1.881,0.001,2.821-0.001c0.128,0,0.257-0.012,0.385-0.021 c0.702-0.051,1.166-0.511,1.22-1.352c0.004-0.064,0-0.129,0.001-0.193c0.011-0.788,0.605-1.396,1.393-1.425 c0.787-0.029,1.438,0.527,1.493,1.318c0.076,1.083-0.265,2.046-0.913,2.907C16.903,11.751,16.819,11.816,16.792,11.923z M8.249,10.436c-0.258-0.008-0.571,0.018-0.882-0.035c-0.536-0.09-0.876-0.39-1.02-0.916C6.19,8.912,6.25,8.388,6.698,7.96 C7.154,7.526,7.694,7.4,8.285,7.645c0.52,0.216,0.859,0.731,0.89,1.293C9.2,9.382,9.178,9.828,9.182,10.272 c0.001,0.116-0.043,0.167-0.161,0.165C8.781,10.434,8.542,10.436,8.249,10.436z M21.682,0H2.318C1.102,0,0.116,0.986,0.116,2.202 v19.317c0,1.37,1.111,2.481,2.481,2.481h18.807c1.37,0,2.481-1.111,2.481-2.481V2.202C23.884,0.986,22.898,0,21.682,0z M20.125,12.473c0.519,0.804,0.733,1.69,0.677,2.657c-0.108,1.886-1.413,3.474-3.25,3.916c-2.585,0.623-4.566-0.923-5.233-2.794 c-0.109-0.304-0.16-0.622-0.224-0.985c-0.068,0.414-0.115,0.789-0.264,1.134c-0.697,1.617-1.884,2.603-3.665,2.799 c-2.104,0.232-4.048-1.067-4.632-3.084c-0.25-0.863-0.175-1.747-0.068-2.625c0.08-0.653,0.321-1.268,0.632-1.848 c0.057-0.106,0.057-0.184-0.01-0.285c-0.561-0.845-0.779-1.777-0.7-2.784C3.43,8.035,3.56,7.52,3.805,7.038 C4.52,5.626,6.09,4.427,8.193,4.626c1.849,0.175,3.562,1.77,3.83,3.564c0.013,0.09,0.039,0.178,0.068,0.311 c0.044-0.241,0.076-0.439,0.118-0.636c0.344-1.63,1.94-3.335,4.201-3.357c2.292-0.021,3.99,1.776,4.31,3.446 c0.17,0.888,0.089,1.776-0.103,2.663c-0.112,0.517-0.31,1.008-0.524,1.492C20.034,12.245,20.043,12.345,20.125,12.473z"
               />
             </svg>
@@ -1193,24 +486,9 @@
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title>npm</title>
-              <path
-                fill="currentColor"
-                d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"
-              />
-            </svg>
-            <p>Npm</p>
-          </div>
-          <div class="item-tech">
-            <svg
-              class="svg-icon"
-              role="img"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
               <title>Jupyter</title>
               <path
-                fill="currentColor"
+                fill="#F37626"
                 d="M7.157 22.201A1.784 1.799 0 0 1 5.374 24a1.784 1.799 0 0 1-1.784-1.799 1.784 1.799 0 0 1 1.784-1.799 1.784 1.799 0 0 1 1.783 1.799zM20.582 1.427a1.415 1.427 0 0 1-1.415 1.428 1.415 1.427 0 0 1-1.416-1.428A1.415 1.427 0 0 1 19.167 0a1.415 1.427 0 0 1 1.415 1.427zM4.992 3.336A1.047 1.056 0 0 1 3.946 4.39a1.047 1.056 0 0 1-1.047-1.055A1.047 1.056 0 0 1 3.946 2.28a1.047 1.056 0 0 1 1.046 1.056zm7.336 1.517c3.769 0 7.06 1.38 8.768 3.424a9.363 9.363 0 0 0-3.393-4.547 9.238 9.238 0 0 0-5.377-1.728A9.238 9.238 0 0 0 6.95 3.73a9.363 9.363 0 0 0-3.394 4.547c1.713-2.04 5.004-3.424 8.772-3.424zm.001 13.295c-3.768 0-7.06-1.381-8.768-3.425a9.363 9.363 0 0 0 3.394 4.547A9.238 9.238 0 0 0 12.33 21a9.238 9.238 0 0 0 5.377-1.729 9.363 9.363 0 0 0 3.393-4.547c-1.712 2.044-5.003 3.425-8.772 3.425Z"
               />
             </svg>
@@ -1231,6 +509,18 @@
             </svg>
             <p>Hyperland</p>
           </div>
+          <div class="item-tech">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="currentColor" fill-rule="evenodd"><path d="m31.48 19.944-3.533-3.533 1.765-3.531 5.74 5.74a1.873 1.873 0 0 1 0 2.648l-7.065 7.064a1.873 1.873 0 0 1-2.648-2.648l5.74-5.74Z" opacity=".56"/><path d="M25.74 11.548a1.873 1.873 0 0 1 2.649 0l1.324 1.325-15.452 15.452a1.873 1.873 0 0 1-2.649 0l-1.324-1.324L25.74 11.548Zm-6.622 4.857-2.65 2.649-3.532-3.533-4.415 4.416 3.532 3.532-1.765 3.532-5.74-5.74a1.873 1.873 0 0 1 0-2.648l7.064-7.064a1.873 1.873 0 0 1 2.65 0l4.856 4.856Z"/></g></svg>
+            <p>daily.dev</p>
+          </div>
+          
+          <div class="item-tech">
+            <svg viewBox="0 0 256 226" xmlns="http://www.w3.org/2000/svg" width="256" height="226" preserveAspectRatio="xMidYMid"><path fill="#05BDBA" d="M69.181 188.087h-2.417l-12.065-12.065v-2.417l18.444-18.444h12.778l1.704 1.704v12.778zM54.699 51.628v-2.417l12.065-12.065h2.417L87.625 55.59v12.778l-1.704 1.704H73.143z"/><path fill="#014847" d="M160.906 149.198h-17.552l-1.466-1.466v-41.089c0-7.31-2.873-12.976-11.689-13.174-4.537-.119-9.727 0-15.274.218l-.833.852v53.173l-1.466 1.466H95.074l-1.466-1.466v-70.19l1.466-1.467h39.503c15.354 0 27.795 12.441 27.795 27.795v43.882l-1.466 1.466Z"/><path fill="#05BDBA" d="M71.677 122.889H1.466L0 121.423V103.83l1.466-1.466h70.211l1.466 1.466v17.593zM254.534 122.889h-70.211l-1.466-1.466V103.83l1.466-1.466h70.211L256 103.83v17.593zM117.876 54.124V1.466L119.342 0h17.593l1.466 1.466v52.658l-1.466 1.466h-17.593zM117.876 223.787v-52.658l1.466-1.466h17.593l1.466 1.466v52.658l-1.466 1.465h-17.593z"/></svg>
+            <p>Netlify</p>
+          </div>
+          </div>
+          </div>
+           
         </div>
 
         <section class="languages-section">
@@ -1241,31 +531,7 @@
           </div>
         </section>
 
-        <section class="education-section">
-          <h2>Education</h2>
-          <div class="education-item">
-            <div class="education-info">
-              <h3 class="education-title">Universidad De Manila</h3>
-              <p class="education-subtitle">
-                BACHELOR IN INFORMATION TECHNOLOGY WITH SPECIALIZATION IN DATA
-                SCIENCE
-              </p>
-            </div>
-            <span class="education-date">2025</span>
-          </div>
-
-          <div class="education-item">
-            <div class="education-info">
-              <h3 class="education-title">
-                JBEST School of Technology and Practical Skills, Inc.
-              </h3>
-              <p class="education-subtitle">
-                INFORMATION AND COMMUNICATION TECHNOLOGY (ICT)
-              </p>
-            </div>
-            <span class="education-date">2021</span>
-          </div>
-        </section>
+        
 
         <section class="experience-section">
          <hr>
@@ -1345,7 +611,7 @@
           </div>
         </section>
 
-        <section class="projects-section" id="projects">
+        <section class="projects-section" id="projects" class="section">
         <hr>
           <h2>Sample Projects</h2>
           <div class="projects-grid">
@@ -1437,7 +703,7 @@
           </div>
         </section>
 
-        <section class="folder-section" id="resources">
+        <section class="folder-section" id="resources" class="section">
           <h2>Resources</h2>
           <div class="folder-grid">
             <a href="#resources" class="folder-item">
@@ -1562,7 +828,61 @@
         renderChart();
       });
 
-      
+     function openTab(evt, tabName) {
+  // Hide all tab content
+  const tabcontent = document.getElementsByClassName("tabcontent");
+  for (let i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Remove "active" class from all tab buttons
+  const tablinks = document.getElementsByClassName("tablink");
+  for (let i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab and mark the button as active
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Open the first tab by default
+document.getElementsByClassName("tablink")[0].click();
+
+
+
+document.querySelectorAll('.navbar a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Highlight the active link based on scroll position and add background color on scroll
+window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.navbar a');
+    const navbar = document.querySelector('.navbar');
+
+    // Highlight active link
+    sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop - sectionHeight * 0.25 && window.scrollY < sectionTop + sectionHeight - sectionHeight * 0.25) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            navLinks[index].classList.add('active');
+        }
+    });
+
+    // Add background color and shadow when scrolled
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
     </script>
   </body>
 </html>
